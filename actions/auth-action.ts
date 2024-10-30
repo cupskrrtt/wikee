@@ -1,7 +1,6 @@
 "use server";
 
 import { pb } from "@/lib/pb/pocket-base";
-import { serialize } from "cookie";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -111,6 +110,7 @@ export async function refreshAuthAction(): Promise<FormState> {
 		pb.authStore.loadFromCookie(oldCookie as string);
 
 		pb.authStore.isValid;
+
 		await pb.collection("users").authRefresh();
 
 		const newCookie = pb.authStore.exportToCookie({ secure: false });

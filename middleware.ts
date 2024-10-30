@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { pb } from "./lib/pb/pocket-base";
+import { AuthModel } from "pocketbase";
 
 export async function middleware(request: NextRequest) {
 	const cookieStore = await cookies();
@@ -13,6 +14,9 @@ export async function middleware(request: NextRequest) {
 	if (!valid) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}
+
+	const user: AuthModel = pb.authStore.model;
+	//TODO: Do This Shit
 
 	return NextResponse.next();
 }
