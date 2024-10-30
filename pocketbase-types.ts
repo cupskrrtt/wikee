@@ -7,7 +7,6 @@ import type { RecordService } from 'pocketbase'
 
 export enum Collections {
 	Users = "users",
-	WikiPosts = "wiki_posts",
 	Wikis = "wikis",
 }
 
@@ -41,33 +40,26 @@ export type UsersRecord = {
 	role?: string
 }
 
-export type WikiPostsRecord<Tdata = unknown> = {
-	data?: null | Tdata
-	wiki_id?: RecordIdString
-}
-
-export type WikisRecord = {
-	description: string
-	name: string
-	user_id: RecordIdString
+export type WikisRecord<Tcontent = unknown> = {
+	author_id: RecordIdString
+	content?: null | Tcontent
+	description?: string
+	name?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
-export type WikiPostsResponse<Tdata = unknown, Texpand = unknown> = Required<WikiPostsRecord<Tdata>> & BaseSystemFields<Texpand>
-export type WikisResponse<Texpand = unknown> = Required<WikisRecord> & BaseSystemFields<Texpand>
+export type WikisResponse<Tcontent = unknown, Texpand = unknown> = Required<WikisRecord<Tcontent>> & BaseSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
 	users: UsersRecord
-	wiki_posts: WikiPostsRecord
 	wikis: WikisRecord
 }
 
 export type CollectionResponses = {
 	users: UsersResponse
-	wiki_posts: WikiPostsResponse
 	wikis: WikisResponse
 }
 
@@ -76,6 +68,5 @@ export type CollectionResponses = {
 
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'users'): RecordService<UsersResponse>
-	collection(idOrName: 'wiki_posts'): RecordService<WikiPostsResponse>
 	collection(idOrName: 'wikis'): RecordService<WikisResponse>
 }
