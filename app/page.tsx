@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import LogoutButton from "./_components/logout-button";
 import RefreshAuthButton from "./_components/refresh-auth-button";
+import { ModeToggle } from "./_components/theme-button";
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 			</Button>
 			<LogoutButton />
 			<RefreshAuthButton />
+			<ModeToggle />
 		</div>
 	);
 }

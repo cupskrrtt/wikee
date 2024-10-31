@@ -41,9 +41,10 @@ export type UsersRecord = {
 }
 
 export type WikisRecord<Tcontent = unknown> = {
-	author_id: RecordIdString
+	author_id?: RecordIdString
 	content?: null | Tcontent
 	description?: string
+	file?: string[]
 	name?: string
 }
 

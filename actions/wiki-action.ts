@@ -1,12 +1,14 @@
 "use server";
 
 import { pb } from "@/lib/pb/pocket-base";
-import { WikiPostsRecord } from "@/pocketbase-types";
+import { getCookies } from "@/lib/utils/cookie-utils";
+import { WikisRecord } from "@/pocketbase-types";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 interface FormState {
 	message: string;
+	data?: any;
 }
 
 export async function createWikiAction(
@@ -40,17 +42,63 @@ export async function createWikiAction(
 	};
 
 	try {
-		const data = await pb.collection("wikis").create(formData);
-		const wikiData: WikiPostsRecord = {
-			wiki_id: data.id,
-		};
-		await pb.collection("wiki_posts").create(wikiData);
+		await pb.collection("wikis").create(formData);
 		revalidatePath("/dashboard");
 		return {
 			message: "success",
 		};
 	} catch (error) {
 		console.log(error);
+		return {
+			message: "error",
+		};
+	}
+}
+
+export async function getWikiById({ id }: { id: string }): Promise<FormState> {
+	return {
+		message: "",
+	};
+}
+
+export async function updateWikiAction({
+	id,
+	data,
+}: {
+	id: string;
+	data: any;
+}): Promise<FormState> {
+	const cookieStore = await cookies();
+	const pb_cookie = cookieStore.get("pb_auth")?.value;
+
+	pb.authStore.loadFromCookie(pb_cookie as string);
+
+	try {
+		const update = await pb.collection("wikis").update(id, data);
+		return {
+			message: "success",
+			data: update,
+		};
+	} catch (error) {
+		return {
+			message: "error",
+		};
+	}
+}
+
+export async function getFileUrl({
+	record,
+	image,
+}: { record: WikisRecord; image: string }): Promise<FormState> {
+	getCookies();
+
+	try {
+		const data = pb.getFileUrl(record, image);
+		return {
+			message: "success",
+			data,
+		};
+	} catch (error) {
 		return {
 			message: "error",
 		};

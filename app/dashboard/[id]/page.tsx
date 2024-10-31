@@ -1,15 +1,14 @@
-import Tiptap from "@/components/Tiptap";
-import { Button } from "@/components/ui/button";
+import Blocknote from "@/components/blocknote";
+import { pb } from "@/lib/pb/pocket-base";
+import { getCookies } from "@/lib/utils/cookie-utils";
 
 export default async function Page({
 	params,
 }: { params: Promise<{ id: string }> }) {
 	const id = (await params).id;
+	await getCookies();
 
-	return (
-		<div>
-			<Tiptap wikiId={id} />
-			<Button>get Wiki</Button>
-		</div>
-	);
+	const data = await pb.collection("wikis").getOne(id);
+
+	return <Blocknote initialContent={data.content} id={id} />;
 }
