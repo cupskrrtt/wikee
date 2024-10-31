@@ -4,27 +4,17 @@ import "@blocknote/core/fonts/inter.css";
 import { getFileUrl, updateWikiAction } from "@/actions/wiki-action";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/shadcn";
+import * as Input from "@/components/ui/input";
 import { useEffect, useState } from "react";
-import * as Button from "@/components/ui/button";
-import * as Card from "@/components/ui/card";
 import "@blocknote/shadcn/style.css";
-import { useTheme } from "next-themes";
-import { pb } from "@/lib/pb/pocket-base";
 import { WikisResponse } from "@/pocketbase-types";
-import { getCookies } from "@/lib/utils/cookie-utils";
 
 interface blockNoteProps {
 	id: string;
 	initialContent: any;
 }
 
-interface uploadFileProps {
-	blockId: string;
-	file: File;
-}
-
 export default function Blocknote({ id, initialContent }: blockNoteProps) {
-	const { theme } = useTheme();
 	const [data, setData] = useState<any>();
 
 	useEffect(() => {
@@ -64,10 +54,8 @@ export default function Blocknote({ id, initialContent }: blockNoteProps) {
 			onChange={() => {
 				setData(editor.document);
 			}}
-			theme={theme === "dark" ? "dark" : "light"}
 			shadCNComponents={{
-				Button,
-				Card,
+				Input,
 			}}
 		/>
 	);
