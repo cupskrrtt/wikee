@@ -1,5 +1,6 @@
 "use server";
 
+import { loginUser, logoutUser, createUser } from "@/lib/data/auth-data";
 import { pb } from "@/lib/pb/pocket-base";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,25 +19,11 @@ export async function registerAction(
 		passwordConfirm: data.get("password") as string,
 	};
 
-	const cookieStore = await cookies();
-
 	try {
-		await pb.collection("users").create(formData);
-
-		pb.authStore.clear();
-
-		await pb
-			.collection("users")
-			.authWithPassword(formData.email, formData.password);
-
-		const cookieData = pb.authStore.exportToCookie({ secure: false });
-
-		cookieStore.set("pb_auth", cookieData, {
-			secure: process.env.NODE_ENV === "production",
-			path: "/",
-			sameSite: "strict",
-			httpOnly: process.env.NODE_ENV === "production",
-		});
+		await createUser({ data: formData });
+		return {
+			message: "success",
+		};
 	} catch (error) {
 		console.log(error);
 		return {
@@ -56,25 +43,9 @@ export async function loginAction(
 		password: data.get("password") as string,
 	};
 
-	const cookieStore = await cookies();
-
 	try {
-		pb.authStore.clear();
-
-		await pb
-			.collection("users")
-			.authWithPassword(formData.email, formData.password);
-
-		const cookie = pb.authStore.exportToCookie({ secure: false });
-
-		cookieStore.set("pb_auth", cookie, {
-			secure: process.env.NODE_ENV === "production",
-			path: "/",
-			sameSite: "strict",
-			httpOnly: process.env.NODE_ENV === "production",
-		});
+		await loginUser({ data: formData });
 	} catch (error) {
-		console.log(error);
 		return {
 			message: "error",
 		};
@@ -84,20 +55,17 @@ export async function loginAction(
 }
 
 export async function logoutAction(): Promise<FormState> {
-	const cookieStore = await cookies();
-
 	try {
-		pb.authStore.clear();
-
-		cookieStore.delete("pb_auth");
-
+		await logoutUser();
 		return {
-			message: "logged out",
+			message: "success",
 		};
 	} catch (error) {
 		return {
 			message: "error",
 		};
+	} finally {
+		redirect("/");
 	}
 }
 

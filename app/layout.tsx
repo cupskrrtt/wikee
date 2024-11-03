@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./_components/theme-provider";
+import { ToastProvider } from "@/components/ui/toast";
+import Header from "./_components/header";
 
 export const metadata: Metadata = {
 	title: "Wikee",
@@ -28,7 +30,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Header />
 					{children}
+					<ToastProvider />
 				</ThemeProvider>
 			</body>
 		</html>

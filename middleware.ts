@@ -12,11 +12,10 @@ export async function middleware(request: NextRequest) {
 	const valid = pb.authStore.isValid;
 
 	if (!valid) {
-		return NextResponse.redirect(new URL("/", request.url));
+		return NextResponse.redirect(new URL("/login", request.url));
 	}
 
 	const user: AuthModel = pb.authStore.model;
-	//TODO: Do This Shit
 
 	return NextResponse.next();
 }

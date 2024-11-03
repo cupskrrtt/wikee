@@ -1,40 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Hi, welcome
 
-## Getting Started
+this app is named wikee. This is a wiki with notion style editor
 
-First, run the development server:
+to use it for yourself you can clone this repo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+git clone https://github.com/cupskrrtt/wikee
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+create an .env.local file with this entry
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+PB_URL
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#Typegen
+PB_TYPEGEN_URL
+PB_TYPEGEN_EMAIL
+PB_TYPEGEN_PASSWORD
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
+> the type gen url env entries is used to generate pocketbase types
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+then use your prefered package manager to install the depedency
 
-## Deploy on Vercel
+```bash
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+npm i
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+or 
 
-## TODO
+```bash
 
-- [ ] find out how to update the db when tiptap content is changin
+yarn install
+
+```
+
+or 
+
+```bash
+
+pnpm install
+
+```
+
+or 
+
+```bash
+
+bun install
+
+```
+
+then start the server
+
+```bash
+
+npm run dev
+
+```
+
+or 
+
+```bash
+
+yarn run dev
+
+```
+
+or 
+
+```bash
+
+pnpm dev
+
+```
+
+or 
+
+```bash
+
+bun dev
+
+```
+
+# Tech used
+- Next.js
+- Pocketbase
+- Shadcn/UI
+- Tailwind CSS
+
