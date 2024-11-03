@@ -94,3 +94,15 @@ bun dev
 - Shadcn/UI
 - Tailwind CSS
 
+# TODO
+- [ ] find the perfect color palette
+- [ ] create profile tab for creator
+- [ ] create favorite page
+- [ ] create random search functionality
+- [ ] create the search functionality for the search bar
+- [ ] create the feature article page
+- [ ] add the views to wiki db
+- [ ] upgrade the creator dashboard
+- [ ] create wiki view page
+- [ ] update all the component to have skeleton to improve UX
+- [ ] update the wiki create/update update page

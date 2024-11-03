@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu, Star, User } from "lucide-react";
 import { logoutAction } from "@/actions/auth-action";
+import { ModeToggle } from "./theme-button";
 
 export default function Header() {
 	const [authed, setAuthed] = useState(false);
@@ -60,6 +61,7 @@ export default function Header() {
 					>
 						Create
 					</Link>
+					<ModeToggle />
 					{authed ? (
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
@@ -115,6 +117,9 @@ export default function Header() {
 						</div>
 					)}
 				</div>
+				<div className="md:hidden">
+					<ModeToggle />
+				</div>
 				<Sheet>
 					<SheetTrigger asChild>
 						<Button variant="ghost" size="icon" className="md:hidden">
@@ -163,8 +168,12 @@ export default function Header() {
 									</Link>
 
 									{/*TODO: create the logout*/}
-									<form action={logoutAct}>
-										<Button variant="ghost" disabled={isPending}>
+									<form action={logoutAct} className="w-full">
+										<Button
+											variant="ghost"
+											disabled={isPending}
+											className="w-full"
+										>
 											Log out
 										</Button>
 									</form>
