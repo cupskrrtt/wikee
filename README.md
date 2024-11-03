@@ -106,3 +106,4 @@ bun dev
 - [ ] create wiki view page
 - [ ] update all the component to have skeleton to improve UX
 - [ ] update the wiki create/update update page
+- [ ] update the homepage to make it more appealing
