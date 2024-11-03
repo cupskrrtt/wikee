@@ -1,8 +1,8 @@
-Hi, welcome
+# Hi, welcome
 
 this app is named wikee. This is a wiki with notion style editor
 
-to use it for yourself you can clone this repo
+### To use it for yourself you can clone this repo
 
 ```bash
 
@@ -25,7 +25,7 @@ PB_TYPEGEN_PASSWORD
 > the type gen url env entries is used to generate pocketbase types
 
 
-then use your prefered package manager to install the depedency
+### Then use your prefered package manager to install the depedency
 
 ```bash
 
@@ -56,7 +56,7 @@ bun install
 
 ```
 
-then start the server
+### Then start the server
 
 ```bash
 
